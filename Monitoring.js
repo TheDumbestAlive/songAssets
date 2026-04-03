@@ -1,4 +1,4 @@
-/*var json = {
+var json = {
   "header": {
     "PPQ": 480,
     "bpm": 120,
@@ -13165,4 +13165,4 @@
       "isPercussion": false
     }
   ]
-};*/
+};
