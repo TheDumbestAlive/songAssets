@@ -1,4 +1,4 @@
-var json = {
+let json = {
   "header": {
     "PPQ": 192,
     "bpm": 182.000182000182,
