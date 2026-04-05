@@ -51,15 +51,15 @@ let Note  = function(note) /* => Number */ {
 
 
 let oscs = {};
-var playNote = function(note, duration, wave, nofade) /* => undefined */{
+let playNote = function(note, duration, wave, nofade) /* => undefined */{
     if(audioCtx.state !== 'suspended'){
-        var difference = Note(note);
+        let difference = Note(note);
         
         if(wave === 'saw'){
             wave = 'sawtooth';
         }
-        var vol = audioCtx.createGain();
-        var osc = audioCtx.createOscillator();
+        let vol = audioCtx.createGain();
+        let osc = audioCtx.createOscillator();
         if(!['sine', 'triangle', 'sawtooth', 'square'].includes(wave)){
             wave = 'sine';
         }
@@ -67,15 +67,16 @@ var playNote = function(note, duration, wave, nofade) /* => undefined */{
             return;
         }
         osc.type = wave;
-        var totalSemitoneJump = Math.pow(SEMITONE_CONSTANT, difference);
+        let totalSemitoneJump = Math.pow(SEMITONE_CONSTANT, difference);
+      let oscId = String(osc.frequency.value) + wave;
         osc.frequency.value = baseHz * totalSemitoneJump;
-                if(oscs[String(osc.frequency.value) + wave]){
-            oscs[String(osc.frequency.value) + wave].stop(0);
-            delete oscs[String(osc.frequency.value) + wave];
+                if(oscs[oscId]){
+            oscs[oscId].stop(0);
+            delete oscs[oscId];
         }
     
-        oscs[String(osc.frequency.value) + wave] = osc;
-        oscs[String(osc.frequency.value) + wave].FREQUENCY_DIFFERENCE = difference;
+        oscs[oscId] = osc;
+        oscs[oscId].FREQUENCY_DIFFERENCE = difference;
         
         vol.gain.value = volume;
         if(!nofade){
@@ -87,11 +88,11 @@ var playNote = function(note, duration, wave, nofade) /* => undefined */{
         osc.start();
         osc.stop(audioCtx.currentTime + duration);
         osc.addEventListener('ended', function(){
-            delete oscs[String(osc.frequency.value) + wave];
+            delete oscs[oscId];
         });
     }
     else{
-        println('Failed to play audio. AudioContext must be started after a user interaction.');
+        console.warn('Failed to play audio. AudioContext must be started after a user interaction.');
     }
 };
       
