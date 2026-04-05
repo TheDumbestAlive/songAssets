@@ -97,7 +97,12 @@ let playNote = function(note, duration, wave, nofade) /* => undefined */{
 };
       
       const processing = (p) => {
-        
+            p.setup = () = {
+                p.width = window.innerWidth;
+                p.height = window.innerHeight;
+                p.background(0,0,0);
+              
+            }
         
       };
       let canvas = document.getElementById('DAW');
