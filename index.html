@@ -32,7 +32,10 @@ for(let i = 0; i < json.tracks.length; i++){
         let indx = 0;
         let found = [];
         while(found.length < maxLength && indx < tracks[selectedTrack].length){
-            
+            if (tracks[selectedTrack][indx].note.toLowerCase() === note.toLowerCase()) {
+              found.push(tracks[selectedTrack][indx])
+            }
+          indx++;
         }
     }
     const processing = (p) => {
