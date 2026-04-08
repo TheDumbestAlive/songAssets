@@ -63,6 +63,7 @@ let playNote = function(note, duration, wave, nofade) /* => undefined */{
         osc.frequency.value = baseHz * totalSemitoneJump;
                 if(oscs[oscId]){
             oscs[oscId].stop(0);
+                console.log('Note Dropped.');
             delete oscs[oscId];
         }
     
