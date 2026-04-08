@@ -40,7 +40,7 @@ for(let i = 0; i < json.tracks.length; i++){
       return found;
     }
     let currOctave = 4;
-    const processing = (p) => {
+    let processing = (p) => {
             p.setup = () => {
                 p.width = window.innerWidth;
                 p.height = window.innerHeight;
